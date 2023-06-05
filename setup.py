@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='primp',
+    name='primp-python',
     version='0.0.1',
     packages=find_packages(),
-    package_dir={'': 'tests'},
+    package_dir={'': 'test'},
     url='',
     license='',
     author='Sipu Ruan',
