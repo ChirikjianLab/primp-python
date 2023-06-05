@@ -1,0 +1,8 @@
+# pycharm stuff
+*.idea/
+*.pcd
+*.pyc
+
+# Data files
+*data/
+*result/

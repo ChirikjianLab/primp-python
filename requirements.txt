@@ -1,0 +1,7 @@
+roboticstoolbox-python
+movement_primitives
+finitediff
+numpy
+scipy
+matplotlib
+dtw-python

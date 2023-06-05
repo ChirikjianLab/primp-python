@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Benchmark for ProMP in learning trajectory distribution from demonstration
+@author: ruan
+"""
+
+import numpy as np
+import dtw
+
+
+def load_dataset_param(dataset_name):
+    demo_type = dict()
+
+    # Type of demonstration
+    if dataset_name == "panda_arm":
+        demo_type = {'simulation/circle', 'simulation/letter_N', 'simulation/letter_U', 'simulation/letter_S',
+                     'real/pouring/default', 'real/scooping/default', 'real/transporting/default',
+                     'real/opening/sliding'}
+    elif dataset_name == "lasa_handwriting/pose_data":
+        demo_type = {'Angle', 'BendedLine', 'CShape', 'DoubleBendedLine', 'GShape', 'heee', 'JShape', 'JShape_2',
+                     'Khamesh', 'Leaf_1', 'Leaf_2', 'Line', 'LShape', 'NShape', 'PShape', 'RShape', 'Saeghe', 'Sharpc',
+                     'Sine', 'Snake', 'Spoon', 'Sshape', 'Trapezoid', 'Worm', 'WShape', 'Zshape', 'Multi_Models_1',
+                     'Multi_Models_2', 'Multi_Models_3', 'Multi_Models_4'}
+
+    return demo_type
+
+
+def evaluate_traj_distribution(traj_res, traj_init):
+    n_demo = traj_init.shape[0]
+    n_sample = traj_res.shape[0]
+    n_step = traj_init.shape[1]
+
+    # Distance to initial trajectory mean (translation only)
+    d_mean_traj = 0.0
+    for k in range(n_demo):
+        for j in range(n_sample):
+            tran_init = traj_init[k, :, :]
+            tran_res = traj_res[j, :, :]
+
+            d_mean_traj += dtw.dtw(tran_res, tran_init).distance
+
+    # Take average over the whole trajectory
+    d_mean_traj /= (n_demo * n_sample * n_step)
+
+    return d_mean_traj
+
+
+# Evaluate similarity between result and desired pose. Measures distance between mean
+def evaluate_desired_position(traj_res, x_desired, t_via):
+    n_sample = traj_res.shape[0]
+    n_step = traj_res.shape[1]
+
+    # Compute index in trajectory closest to desired time step
+    step_via = int(np.floor(t_via * n_step))
+    if step_via < 0:
+        step_via = 0
+    elif step_via >= n_step-1:
+        step_via = n_step-1
+
+    # Compute distance to desired pose
+    d_desired_pose = 0.0
+    for j in range(n_sample):
+        tran_res = traj_res[j, step_via, :]
+        d_desired_pose += np.linalg.norm(x_desired - tran_res)
+
+    # Take average over all samples
+    d_desired_pose /= n_sample
+
+    return d_desired_pose
