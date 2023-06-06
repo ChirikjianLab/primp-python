@@ -4,7 +4,6 @@ setup(
     name='primp-python',
     version='0.0.1',
     packages=find_packages(),
-    package_dir={'': 'test'},
     url='',
     license='',
     author='Sipu Ruan',

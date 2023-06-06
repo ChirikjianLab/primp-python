@@ -27,6 +27,12 @@ Wrapper class that calls the library [movement_primitives](https://github.com/df
 1. Only 3D position of the end effector
 2. (TODO) the full 6D pose using [Orientation-ProMP](https://proceedings.mlr.press/v164/rozo22a.html)
 
+## Installation
+We recommend using `pip` to install the package:
+```
+pip install .
+```
+
 ## Usage
 ### Data preparation for LfD methods
 All test files are located in [/test](/test) folder. To run scripts for LfD methods:
