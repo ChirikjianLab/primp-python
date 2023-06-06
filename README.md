@@ -18,17 +18,24 @@ See [requirements.txt](/primp/requirements.txt)
 - (Optional) [dtw-python](https://pypi.org/project/dtw-python/): Dynamic Time Warping for evaluating distance between learned and demonstrated trajectories
 
 ## Features
-### PRIMP ([`/primp/src/primp/`](/primp/src/primp/))
+### PRIMP
 Class for the proposed PRIMP method, working on Lie groups. The full 6D pose is considered.
 
-### Probabilistic Movement Primitives (ProMP) ([`/primp/src/others/promp/`](`/primp/src/others/promp/`))
+### Probabilistic Movement Primitives (ProMP)
 Wrapper class that calls the library [movement_primitives](https://github.com/dfki-ric/movement_primitives). The learning spaces include:
 
 1. Only 3D position of the end effector
 2. (TODO) the full 6D pose using [Orientation-ProMP](https://proceedings.mlr.press/v164/rozo22a.html)
 
 ## Usage
-All scripts are located in [`/test`](/tests) folder.
+### Data preparation for LfD methods
+All test files are located in [/test](/test) folder. To run scripts for LfD methods:
+
+- Download the data from [Google Drive](https://drive.google.com/drive/folders/1sgfAjBgO3PWO2nCqerXjVHsovpNF4MgS?usp=sharing). All the demonstrated datasets are locataed in `/demonstrations` folder.
+- Generate `/data` folder that stores all demonstration data
+- Copy all the demonstration sets into the `/data` folder
+- Run scripts in /test folder
+
 
 ### Using PRIMP for end effector 6D poses
 ```sh
