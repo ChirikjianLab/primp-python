@@ -48,13 +48,11 @@ def main():
     xi_via = get_exp_coord(g_via, "PCG")
     xi_via[:3] = w_fixed
 
-    X_w = pl.to_workspace_start(T, X, g_start)
-
     # Learn distribution using ProMP
     print("ProMP learning trajectory distributions...")
     start = time.time()
 
-    promp, mean, std, cov_joint = pl.promp_learn(T, X_w)
+    promp, mean, std, cov_joint = pl.promp_learn(T, X, 30)
 
     # Condition on via points
     print("Condition on via points")
