@@ -16,12 +16,11 @@ def load_dataset_param(dataset_name):
     if dataset_name == "panda_arm":
         demo_type = {'simulation/circle', 'simulation/letter_N', 'simulation/letter_U', 'simulation/letter_S',
                      'real/pouring/default', 'real/scooping/default', 'real/transporting/default',
-                     'real/opening/sliding'}
+                     'real/opening/sliding', 'real/opening/rotating_left', 'real/opening/rotating_down'}
     elif dataset_name == "lasa_handwriting/pose_data":
         demo_type = {'Angle', 'BendedLine', 'CShape', 'DoubleBendedLine', 'GShape', 'heee', 'JShape', 'JShape_2',
                      'Khamesh', 'Leaf_1', 'Leaf_2', 'Line', 'LShape', 'NShape', 'PShape', 'RShape', 'Saeghe', 'Sharpc',
-                     'Sine', 'Snake', 'Spoon', 'Sshape', 'Trapezoid', 'Worm', 'WShape', 'Zshape', 'Multi_Models_1',
-                     'Multi_Models_2', 'Multi_Models_3', 'Multi_Models_4'}
+                     'Sine', 'Snake', 'Spoon', 'Sshape', 'Trapezoid', 'Worm', 'WShape', 'Zshape'}
 
     return demo_type
 

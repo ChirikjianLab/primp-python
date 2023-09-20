@@ -10,8 +10,8 @@ from movement_primitives.promp import ProMP
 import numpy as np
 
 
-def promp_learn(T, X):
-    promp = ProMP(n_weights_per_dim=30, n_dims=X.shape[2])
+def promp_learn(T, X, n_weights_per_dim=30):
+    promp = ProMP(n_weights_per_dim=n_weights_per_dim, n_dims=X.shape[2])
     promp.imitate(T, X)
     mean = promp.mean_trajectory(T[0])
     cov = promp.cov_trajectory(T[0])
