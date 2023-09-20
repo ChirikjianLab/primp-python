@@ -22,7 +22,7 @@ def benchmark(dataset_name, demo_type):
     load_prefix = data_path_prefix + dataset_name + "/" + demo_type + "/"
 
     # Parameter for ProMP
-    n_weight = [5, 10, 15, 20, 30]
+    n_weight = [10, 20, 30, 40, 50]
     n_param = len(n_weight)
 
     # Load data and down sample
@@ -45,10 +45,8 @@ def benchmark(dataset_name, demo_type):
         for i in range(n_trial):
             print(str(i/n_trial*100.0) + "%")
 
-            xi_goal = get_exp_coord(g_goal[i])
-            xi_via = get_exp_coord(g_via[i])
-            x_goal = xi_goal[3:]
-            x_via = xi_via[3:]
+            x_goal = g_goal[i][:3,3]
+            x_via = g_via[i][:3,3]
 
             # Learn distribution using ProMP
             promp, mean, std, cov_joint = pl.promp_learn(T, X, n_weight[j])
@@ -74,6 +72,7 @@ def benchmark(dataset_name, demo_type):
     # Store benchmark results
     dictionary = {
         "format": "n_param x n_trial",
+        "num of weights": n_weight,
         "d_demo_goal": d_demo["goal"].tolist(),
         "d_demo_via": d_demo["via"].tolist(),
         "d_via_goal": d_via["goal"].tolist(),
@@ -99,8 +98,8 @@ def benchmark(dataset_name, demo_type):
 
 
 if __name__ == "__main__":
-    dataset_name = "panda_arm"
-    # dataset_name = "lasa_handwriting/pose_data"
+    # dataset_name = "panda_arm"
+    dataset_name = "lasa_handwriting/pose_data"
 
     demo_types = bu.load_dataset_param(dataset_name)
 
