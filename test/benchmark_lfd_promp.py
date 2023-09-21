@@ -29,54 +29,55 @@ def benchmark(dataset_name, demo_type):
     T, X, w_rot = load_demos_position(50, load_prefix)
 
     # Load random via/goal poses for benchmark
-    g_goal, cov_goal, t_via, g_via, cov_via = load_via_poses(result_path_prefix)
-    n_trial = g_goal.shape[0]
+    t_via_1, g_via_1, cov_via_1, t_via_2, g_via_2, cov_via_2 = load_via_poses(result_path_prefix)
+    n_trial = g_via_1.shape[0]
 
     # Benchmark
     print("Benchmark: ProMP")
     print("Dataset: " + dataset_name)
     print("Demo type: " + demo_type)
 
-    d_demo = {"goal": np.zeros((n_param, n_trial)), "via": np.zeros((n_param, n_trial))}
-    d_via = {"goal": np.zeros((n_param, n_trial)), "via": np.zeros((n_param, n_trial))}
+    d_demo = {"via_1": np.zeros((n_param, n_trial)), "via_2": np.zeros((n_param, n_trial))}
+    d_via = {"via_1": np.zeros((n_param, n_trial)), "via_2": np.zeros((n_param, n_trial))}
     for j in range(n_param):
         print("Number of weights per dimension: " + str(n_weight[j]))
 
         for i in range(n_trial):
             print(str(i/n_trial*100.0) + "%")
 
-            x_goal = g_goal[i][:3,3]
-            x_via = g_via[i][:3,3]
+            x_via_1 = g_via_1[i][:3, 3]
+            x_via_2 = g_via_2[i][:3, 3]
 
             # Learn distribution using ProMP
             promp, mean, std, cov_joint = pl.promp_learn(T, X, n_weight[j])
 
-            # Condition on goal point
-            promp_g, mean_g, std_g, cov_joint_g = pl.promp_condition(promp, T, x_goal, cov=cov_goal[i][3:, 3:], t_c=1.0)
+            # Condition on via-point poses
+            promp_g, mean_g, std_g, cov_joint_g = pl.promp_condition(promp, T, x_via_1, cov=cov_via_1[i][3:, 3:],
+                                                                     t_c=t_via_1[i])
             random_state = np.random.RandomState()
-            x_samples_goal = promp_g.sample_trajectories(T[0], n_sample, random_state)
+            x_samples_1 = promp_g.sample_trajectories(T[0], n_sample, random_state)
 
-            # Condition on via point
-            promp_v, mean_v, std_v, cov_joint_v = pl.promp_condition(promp_g, T, x_via, cov=cov_via[i][3:, 3:], t_c=t_via[i])
+            promp_v, mean_v, std_v, cov_joint_v = pl.promp_condition(promp_g, T, x_via_2, cov=cov_via_2[i][3:, 3:],
+                                                                     t_c=t_via_2[i])
             random_state = np.random.RandomState()
-            x_samples_via = promp_v.sample_trajectories(T[0], n_sample, random_state)
+            x_samples_2 = promp_v.sample_trajectories(T[0], n_sample, random_state)
 
             # Compute distance to initial trajectory/demonstration
-            d_demo["goal"][j][i] = bu.evaluate_traj_distribution(x_samples_goal, X)
-            d_demo["via"][j][i] = bu.evaluate_traj_distribution(x_samples_via, X)
+            d_demo["via_1"][j][i] = bu.evaluate_traj_distribution(x_samples_1, X)
+            d_demo["via_2"][j][i] = bu.evaluate_traj_distribution(x_samples_2, X)
 
             # Compute distance to initial trajectory/demonstration
-            d_via["goal"][j][i] = bu.evaluate_desired_position(x_samples_goal, x_goal, 1.0)
-            d_via["via"][j][i] = bu.evaluate_desired_position(x_samples_via, x_via, t_via[i])
+            d_via["via_1"][j][i] = bu.evaluate_desired_position(x_samples_1, x_via_1, t_via_1[i])
+            d_via["via_2"][j][i] = bu.evaluate_desired_position(x_samples_2, x_via_2, t_via_2[i])
 
     # Store benchmark results
     dictionary = {
         "format": "n_param x n_trial",
-        "num of weights": n_weight,
-        "d_demo_goal": d_demo["goal"].tolist(),
-        "d_demo_via": d_demo["via"].tolist(),
-        "d_via_goal": d_via["goal"].tolist(),
-        "d_via_via": d_via["via"].tolist()
+        "num_of_weights": n_weight,
+        "d_demo_via_1": d_demo["via_1"].tolist(),
+        "d_demo_via_2": d_demo["via_2"].tolist(),
+        "d_via_via_1": d_via["via_1"].tolist(),
+        "d_via_via_2": d_via["via_2"].tolist()
     }
     write_json_file(dictionary, result_path_prefix + "/result_lfd_promp.json")
 
@@ -84,17 +85,17 @@ def benchmark(dataset_name, demo_type):
     file_path = result_path_prefix + "/result_lfd_promp.txt"
     with open(file_path, "w") as f:
         print("===========================", file=f)
-        print(">>>> Condition on goal <<<<", file=f)
+        print(">>>> Condition on 1 via point <<<<", file=f)
         print("---- Distance to demo (translation only):", file=f)
-        print("ProMP (Tran): " + str(np.mean(d_demo["goal"], axis=1)), file=f)
+        print("ProMP (Tran): " + str(np.mean(d_demo["via_1"], axis=1)), file=f)
         print('---- Distance to desired pose (translation only):', file=f)
-        print("ProMP (Tran): " + str(np.mean(d_via["goal"], axis=1)), file=f)
+        print("ProMP (Tran): " + str(np.mean(d_via["via_1"], axis=1)), file=f)
         print('---------------------------------------------------------------', file=f)
-        print('>>>> Condition on goal and a via pose <<<<', file=f)
+        print('>>>> Condition on 2 via points <<<<', file=f)
         print("---- Distance to demo (translation only):", file=f)
-        print("ProMP (Tran): " + str(np.mean(d_demo["via"], axis=1)), file=f)
+        print("ProMP (Tran): " + str(np.mean(d_demo["via_2"], axis=1)), file=f)
         print('---- Distance to desired pose (translation only):', file=f)
-        print("ProMP (Tran): " + str(np.mean(d_via["via"], axis=1)), file=f)
+        print("ProMP (Tran): " + str(np.mean(d_via["via_2"], axis=1)), file=f)
 
 
 if __name__ == "__main__":

@@ -94,18 +94,18 @@ def load_demos(file_prefix, n_step, align_method="gora"):
 def load_via_poses(file_prefix):
     filename_prefix = "/trials_random"
 
-    # Goal poses
-    trials_data_goal = load_json_file(file_prefix + "/" + filename_prefix + "_goal.json")
-    g_goal = np.array(trials_data_goal["g_goal"])
-    cov_goal = np.array(trials_data_goal["cov_goal"])
+    # Via-point poses
+    trials_data = load_json_file(file_prefix + "/" + filename_prefix + "_via_1.json")
+    t_via_1 = np.array(trials_data["t_via"])
+    g_via_1 = np.array(trials_data["g_via"])
+    cov_via_1 = np.array(trials_data["cov_via"])
 
-    # Via poses
-    trials_data_via = load_json_file(file_prefix + "/" + filename_prefix + "_via.json")
-    t_via = np.array(trials_data_via["t_via"])
-    g_via = np.array(trials_data_via["g_via"])
-    cov_via = np.array(trials_data_via["cov_via"])
+    trials_data = load_json_file(file_prefix + "/" + filename_prefix + "_via_2.json")
+    t_via_2 = np.array(trials_data["t_via"])
+    g_via_2 = np.array(trials_data["g_via"])
+    cov_via_2 = np.array(trials_data["cov_via"])
 
-    return g_goal, cov_goal, t_via, g_via, cov_via
+    return t_via_1, g_via_1, cov_via_1, t_via_2, g_via_2, cov_via_2
 
 
 # Write data to .json file
