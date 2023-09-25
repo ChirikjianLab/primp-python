@@ -99,10 +99,13 @@ def benchmark(dataset_name, demo_type):
 
 
 if __name__ == "__main__":
-    # dataset_name = "panda_arm"
-    dataset_name = "lasa_handwriting/pose_data"
+    # Name of dataset
+    dataset_names = ["panda_arm", "lasa_handwriting/pose_data"]
 
-    demo_types = bu.load_dataset_param(dataset_name)
+    for dataset_name in dataset_names:
+        # Name of demo types
+        demo_types = bu.load_dataset_param(dataset_name)
 
-    for demo_type in demo_types:
-        benchmark(dataset_name, demo_type)
+        for demo_type in demo_types:
+            # Run benchmark for each demo type for each dataset
+            benchmark(dataset_name, demo_type)
