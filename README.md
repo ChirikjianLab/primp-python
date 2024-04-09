@@ -1,12 +1,11 @@
 # PRobabilistically-Informed Motion Primitives (PRIMP)
-Python implementation of PRobabilistically-Informed Motion Primitives, a learning-from-demonstration method on Lie group.
+Python implementation of PRobabilistically-Informed Motion Primitives, a learning-from-demonstration method on Lie group. This work is published in __IEEE Transactions on Robotics (T-RO)__.
 
-Documentation is available in [ArXiv](https://arxiv.org/abs/2305.15761).
-
-MATLAB version is available [here](https://github.com/ChirikjianLab/primp-matlab).
+- Publication: [T-RO](), [ArXiv](https://arxiv.org/abs/2305.15761)
+- MATLAB version (includes more demos) is available [here](https://github.com/ChirikjianLab/primp-matlab).
 
 ## Authors
-Sipu Ruan (repository maintainer), Weixiao Liu, Xiaoli Wang, Xin Meng and Gregory S. Chirikjian
+[Sipu Ruan](https://ruansp.github.io), Weixiao Liu, Xiaoli Wang, Xin Meng and Gregory S. Chirikjian
 
 ## Dependencies
 See [requirements.txt](/primp/requirements.txt)
