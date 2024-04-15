@@ -1,8 +1,11 @@
 # PRobabilistically-Informed Motion Primitives (PRIMP)
-Python implementation of PRobabilistically-Informed Motion Primitives, a learning-from-demonstration method on Lie group. This work is published in __IEEE Transactions on Robotics (T-RO)__.
+[![Python](https://github.com/ChirikjianLab/primp-python/actions/workflows/python-package.yml/badge.svg)](https://github.com/ChirikjianLab/primp-python/actions/workflows/python-package.yml)
+
+Python implementation of PRobabilistically-Informed Motion Primitives, a learning-from-demonstration method on Lie group. This work is published in _IEEE Transactions on Robotics (T-RO)_.
 
 - Publication: [T-RO](), [ArXiv](https://arxiv.org/abs/2305.15761)
-- MATLAB version (includes more demos) is available [here](https://github.com/ChirikjianLab/primp-matlab).
+- Project page: [https://chirikjianlab.github.io/primp-page/](https://chirikjianlab.github.io/primp-page/)
+- MATLAB version (includes more demos): [https://github.com/ChirikjianLab/primp-matlab](https://github.com/ChirikjianLab/primp-matlab).
 
 ## Authors
 [Sipu Ruan](https://ruansp.github.io), Weixiao Liu, Xiaoli Wang, Xin Meng and Gregory S. Chirikjian
@@ -12,9 +15,9 @@ See [requirements.txt](/primp/requirements.txt)
 - numpy
 - scipy
 - [finitediff](https://pypi.org/project/finitediff/): Compute finite difference
-- (Optional) [roboticstoolbox-python](https://github.com/petercorke/robotics-toolbox-python): Robotics toolbox for different operations and visualizations
-- (Optional) [movement_primitives](https://github.com/dfki-ric/movement_primitives): Python library for movement primitives
-- (Optional) [dtw-python](https://pypi.org/project/dtw-python/): Dynamic Time Warping for evaluating distance between learned and demonstrated trajectories
+- [movement_primitives](https://github.com/dfki-ric/movement_primitives): Python library for movement primitives
+- [dtw-python](https://pypi.org/project/dtw-python/): Dynamic Time Warping for evaluating distance between learned and demonstrated trajectories
+- [roboticstoolbox-python](https://github.com/petercorke/robotics-toolbox-python): Robotics toolbox for different operations and visualizations
 
 ## Features
 ### PRIMP
@@ -23,8 +26,7 @@ Class for the proposed PRIMP method, working on Lie groups. The full 6D pose is 
 ### Probabilistic Movement Primitives (ProMP)
 Wrapper class that calls the library [movement_primitives](https://github.com/dfki-ric/movement_primitives). The learning spaces include:
 
-1. Only 3D position of the end effector
-2. (TODO) the full 6D pose using [Orientation-ProMP](https://proceedings.mlr.press/v164/rozo22a.html)
+- Only 3D position of the end effector
 
 ## Installation
 We recommend using `pip` to install the package:

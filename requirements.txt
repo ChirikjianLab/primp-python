@@ -1,7 +1,7 @@
-roboticstoolbox-python
-movement_primitives
-finitediff
 numpy
 scipy
 matplotlib
+finitediff
 dtw-python
+movement_primitives
+roboticstoolbox-python
