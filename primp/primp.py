@@ -7,6 +7,10 @@ import numpy as np
 
 
 class PrIMP:
+    """
+    PRIMP class for PRobabilistically-Informed Motion Primitives. It encodes demonstrated trajectories in Lie groups,
+    adapts to novel via-point poses.
+    """
     def __init__(self, g_demos=None, mean_init=None, cov_init=None, group_name="SE"):
         # Initial input values
         self._g_demos = g_demos

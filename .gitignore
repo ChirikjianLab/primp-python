@@ -6,3 +6,6 @@
 # Data files
 *data/
 *result/
+
+# Doc files
+*doc/
