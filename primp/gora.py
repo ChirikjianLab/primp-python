@@ -8,8 +8,11 @@ from scipy.integrate import cumtrapz
 class GORA:
     """
     Globally Optimal Reparameterization Algorithm (GORA) for SE(3) trajectory data
+
     1. Recovering a finite difference approximation of the change between adjacent frames of an SE(3) trajectory
-    2. globally minimizing the functional of the form ``J = \int_0^1 g(\tau) \dot{\tau} dt''
+
+    2. globally minimizing the functional of the form J = \int_0^1 g(\tau) \dot{\tau} dt
+
     3. reparameterizing the sequence with the optimal time steps
 
     @authors: Sipu Ruan, Thomas Mitchel
@@ -48,6 +51,7 @@ class GORA:
     def get_cost_functional(self, tau, g_tau):
         """
         Compute cost functional
+
         :param tau: Parameterization of the trajectory
         :param g_tau: SE(3) trajectory parameterized by tau
         :return: Cost functional value
@@ -59,6 +63,7 @@ class GORA:
     def __g_tau(self):
         """
         Generate g(\tau) for the input of Euler-Lagrange equation
+
         :return: Computed g(tau)
         """
         dg = df_vect(self._t0, self._g_init, 1, 2, 0)
@@ -72,6 +77,7 @@ class GORA:
     def __temporal_reparam(self, g):
         """
         Compute the globally optimal time sequence by Theorem 1
+
         :param g: Parameterized g(tau)
         """
         f = cumtrapz(g ** 0.5, self._t0, initial=0)

@@ -1,5 +1,4 @@
 from primp.util.se3_util import get_exp_mapping, get_exp_coord
-
 import numpy as np
 import warnings
 
@@ -7,6 +6,7 @@ import warnings
 def get_mean(g, group_name="SE"):
     """
     Compute mean of a set of SE(3)
+
     :param g: The set of SE(3) elements
     :param group_name: Name of the group
     :return: Mean of the set
@@ -47,6 +47,7 @@ def get_mean(g, group_name="SE"):
 def get_covariance(g, mu=None, group_name="SE"):
     """
     Compute covariance of a set of SE(3)
+
     :param g: The set of SE(3) elements
     :param mu: Computed mean or None
     :param group_name: Name of the group

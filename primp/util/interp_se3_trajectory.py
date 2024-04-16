@@ -15,8 +15,8 @@ def interp_se3_trajectory_svd(t0, x_traj, t):
     :param t: Desired time sequence
     :return: Interpolated SE(3) trajectory
 
-    Author: Thomas Mitchel, 2018
-    Maintainer: Sipu Ruan, 2022
+    @author: Thomas Mitchel, 2018
+    @maintainer: Sipu Ruan, 2022
     """
 
     num_t0 = len(t0)

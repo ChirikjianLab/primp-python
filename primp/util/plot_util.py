@@ -1,6 +1,5 @@
 import roboticstoolbox as rtb
 from spatialmath import SE3, UnitQuaternion
-
 import numpy as np
 import matplotlib.pyplot as plt
 

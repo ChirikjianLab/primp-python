@@ -7,6 +7,7 @@ import warnings
 def homo2pose_quat(g=np.identity(4)):
     """
     Convert SE(3) homogeneous matrix to pose vector, rotation is represented by unit Quaternion
+
     :param g: SE(3) element
     :return: Pose vector, quaternion order: [x, y, z, w]
     """
@@ -23,6 +24,7 @@ def homo2pose_quat(g=np.identity(4)):
 def homo2pose_axang(g=np.identity(4)):
     """
     Convert SE(3) homogeneous matrix to pose vector, rotation is represented by axis-angle
+
     :param g: SE(3) element
     :return: Pose vector, axis-angle order: [axis-x, axis-y, axis-z, angle]
     """
@@ -40,6 +42,7 @@ def homo2pose_axang(g=np.identity(4)):
 def get_exp_mapping(exp_coord=np.zeros(6), group_name="SE"):
     """
     Get the exponential mapping from Lie algebra (exponential coordinates) to Lie group
+
     :param exp_coord: Exponential coordinates of the form [\omega, v]
     :param group_name: "SE" (default), "PCG"
     :return: Homogeneous transformation matrix
@@ -64,6 +67,7 @@ def get_exp_mapping(exp_coord=np.zeros(6), group_name="SE"):
 def get_exp_coord(g=np.identity(4), group_name="SE"):
     """
     Get exponential coordinates from Lie group to Lie algebra
+
     :param g: Homogeneous transformation matrix for poses
     :param group_name: "SE" (default), "PCG"
     :return: Exponential coordinates of the form [\omega, v]
@@ -89,6 +93,7 @@ def get_exp_coord(g=np.identity(4), group_name="SE"):
 def expm_se3(xi=np.zeros(6)):
     """
     Closed-form exponential from se(3) to SE(3)
+
     :param xi: Element in se(3) of the form [\omega, v]
     :return: Homogeneous transformation matrix for SE(3)
     """
@@ -102,6 +107,7 @@ def expm_se3(xi=np.zeros(6)):
 def expm_so3(w=np.zeros(3)):
     """
     Closed-form exponential for so(3) into SO(3)
+
     :param w: Vector for rotation
     :return: Rotation matrix
     """
@@ -116,6 +122,7 @@ def expm_so3(w=np.zeros(3)):
 def logm_se3(g=np.identity(4)):
     """
     Closed-form logarithm from SE(3) to se(3)
+
     :param g: Homogeneous transformation matrix for SE(3)
     :return: Element in se(3) in the matrix form
     """
@@ -135,6 +142,7 @@ def logm_se3(g=np.identity(4)):
 def logm_so3(rot=np.identity(3)):
     """
     Closed-form logarithm from SO(3) to so(3)
+
     :param rot: Rotation matrix as element in SO(3)
     :return: Element in so(3) in the matrix form
     """
@@ -158,6 +166,7 @@ def logm_so3(rot=np.identity(3)):
 def jacobian_so3_l(w=np.zeros(3)):
     """
     Closed-form left Jacobian of SO(3)
+
     :param w: Vector for the rotation
     :return: Closed-form left Jacobian of SO(3)
     """
@@ -172,6 +181,7 @@ def jacobian_so3_l(w=np.zeros(3)):
 def jacobian_inv_so3_l(w=np.zeros(3)):
     """
     Closed-form left inverse Jacobian of SO(3)
+
     :param w: Vector for the rotation
     :return: Closed-form left inverse Jacobian of SO(3)
     """
@@ -188,6 +198,7 @@ def jacobian_inv_so3_l(w=np.zeros(3)):
 def adjoint_group(g=np.identity(4), group_name="SE"):
     """
     Adjoint operator for groups SE(3) or PCG(3)
+
     :param g: Group element in homogeneous matrix form
     :param group_name: "SE" (default), "PCG"
     :return: Adjoint operator
@@ -216,6 +227,7 @@ def adjoint_group(g=np.identity(4), group_name="SE"):
 def skew(w=np.zeros(3)):
     """
     Construct skew-symmetric matrix from vector
+
     :param w: Vector of size 3
     :return: Skew-symmetric matrix
     """
@@ -225,6 +237,7 @@ def skew(w=np.zeros(3)):
 def vex(w_hat=np.zeros((3, 3))):
     """
     Extract vector form from skew-symmetric matrix
+
     :param w_hat: Skew-symmetric matrix
     :return: Vector form
     """
@@ -234,6 +247,7 @@ def vex(w_hat=np.zeros((3, 3))):
 def norm_se3(g):
     """
     Weighted norm of SE(3)
+
     :param g: an SE(3) element
     :return: Weighted norm
     """

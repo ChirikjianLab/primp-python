@@ -1,9 +1,7 @@
 from primp.util.se3_util import homo2pose_quat, homo2pose_axang, get_exp_coord
 from primp.util.interp_se3_trajectory import interp_se3_trajectory_svd
 from primp.gora import GORA
-
 import roboticstoolbox as rtb
-
 import json
 import csv
 import numpy as np
@@ -13,6 +11,7 @@ import os
 def store_learned_density(g_mean, cov_joint, cov_step, file_name):
     """
     Store the learned trajectory distribution (density) into file. Format: .json
+
     :param g_mean: The trajectory mean
     :param cov_joint: The covariance matrix of joint distribution
     :param cov_step: An array of covariance
@@ -36,6 +35,7 @@ def store_learned_density(g_mean, cov_joint, cov_step, file_name):
 def store_mean_csv(g_mean, file_name):
     """
     Store the mean trajectory into file. Format: .csv
+
     :param g_mean: The mean trajectory as an array of poses
     :param file_name: The name of file for storage
     """
@@ -49,6 +49,7 @@ def store_mean_csv(g_mean, file_name):
 def store_start_goal(g_start, g_goal, file_name):
     """
     Store start and goal poses into file. Format: .json
+
     :param g_start: The starting pose
     :param g_goal: The goal pose
     :param file_name: The name of file for storage
@@ -64,6 +65,7 @@ def store_start_goal(g_start, g_goal, file_name):
 def store_samples(g_samples, file_name):
     """
     Store the sampled trajectories from the distribution into file. Format: .json
+
     :param g_samples: The sampled trajectories as an array of trajectories
     :param file_name: The name of file for storage
     """
@@ -87,6 +89,7 @@ def store_samples(g_samples, file_name):
 def load_demos(file_prefix, n_step, align_method="gora"):
     """
     Load demonstrations from file
+
     :param file_prefix: The prefix of the file name
     :param n_step: The number of time steps
     :param align_method: The method of temporal alignment: "gora", "interp"
@@ -123,6 +126,7 @@ def load_demos(file_prefix, n_step, align_method="gora"):
 def load_via_poses(file_prefix):
     """
     Load via-point poses from file (only two via points)
+
     :param file_prefix: The prefix of file name
     :return t_via_1: Time step for via point 1
     :return g_via_1: Pose of via point 1
@@ -150,6 +154,7 @@ def load_via_poses(file_prefix):
 def write_json_file(data, filename):
     """
     Write data into .json file
+
     :param data: Data to be written
     :param filename: The file name for storage
     """
@@ -162,6 +167,7 @@ def write_json_file(data, filename):
 def load_json_file(filename):
     """
     Load data from .json file
+
     :param filename: The file name for data
     :return data: The loaded data
     """
@@ -174,6 +180,7 @@ def load_json_file(filename):
 def write_csv_file(data_array, filename):
     """
     Write data into .csv file
+
     :param data_array: Data to be written
     :param filename: The file name for storage
     """
@@ -187,6 +194,7 @@ def write_csv_file(data_array, filename):
 def load_csv_file(filename):
     """
     Load data from .csv file
+
     :param filename: The file name for data
     :return data: The loaded data
     """
@@ -202,6 +210,7 @@ def load_csv_file(filename):
 def load_robot(n_step=50):
     """
     Load Panda robot with random start/goal configurations and interpolated trajectory in between
+
     :param n_step: Number of time steps
     :return robot: Panda model object
     :return q_traj: Joint-space trajectory
@@ -225,6 +234,7 @@ def load_robot(n_step=50):
 def convert_time_to_index(t, n_step):
     """
     Convert time step into index
+
     :param t: The time step
     :param n_step: The number of time steps
     :return idx: The index in the time sequence
@@ -241,6 +251,7 @@ def convert_time_to_index(t, n_step):
 def load_demos_position(num_step, file_prefix):
     """
     Load demonstrated trajectories (Only position)
+
     :param num_step: Number of time steps
     :param file_prefix: The prefix of file name
     :return T: Time sequence of trajectory
@@ -273,6 +284,7 @@ def load_demos_position(num_step, file_prefix):
 def store_promp(mean, cov_step, cov_joint, file_name):
     """
     Store learned distribution into file. Format: .json
+
     :param mean: Mean trajectory
     :param cov_step: Covariance at each time step
     :param cov_joint: The covariance of joint distribution
@@ -291,6 +303,7 @@ def store_promp(mean, cov_step, cov_joint, file_name):
 def store_promp_mean_csv(mean, file_name):
     """
     Store mean trajectory learned by ProMP into file. Format: .csv
+
     :param mean: Mean trajectory
     :param file_name: The file name for storage
     """

@@ -1,7 +1,6 @@
 from primp.util.se3_util import get_exp_mapping, get_exp_coord, adjoint_group
 from primp.util.se3_distribution import get_mean, get_covariance
 from primp.gora import GORA
-
 import warnings
 import numpy as np
 
@@ -52,6 +51,7 @@ class PrIMP:
     def get_joint_pdf(self):
         """
         Retrieve joint distribution
+
         :return: self._mean_joint: Mean value of the joint distribution
         :return: self._cov_joint: Covariance matrix of the joint distribution
         """
@@ -60,6 +60,7 @@ class PrIMP:
     def get_covariance_step(self):
         """
         Retrieve covariance of each step
+
         :return: cov_step: Covariance matrix of each step
         """
         cov_step = np.empty((self._n_step, 6, 6))
@@ -71,6 +72,7 @@ class PrIMP:
     def get_samples(self, n_sample=5):
         """
         Generate random samples from Gaussian based on joint distribution
+
         :param: n_sample: Number of samples
         :return: Array of SE(3) trajectory samples
         """
@@ -91,6 +93,7 @@ class PrIMP:
     def condition_via_pose(self, g_via=np.identity(4), cov_via=np.identity(6), t_via=1.0):
         """
         Compute conditional distribution based on via pose
+
         :param g_via: Mean of the via pose
         :param cov_via: Covariance of the via pose
         :param t_via: Time parameter of the desired pose
@@ -141,6 +144,7 @@ class PrIMP:
     def __compute_time_step_idx(self, t_via=1.0):
         """
         Compute index of the closest step in the trajectory with the desired pose
+
         :param t_via: time parameter for the desired via pose, [0,1]
         """
         # Locate the closest step with the desired via pose

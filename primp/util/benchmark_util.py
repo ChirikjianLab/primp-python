@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Benchmark for ProMP in learning trajectory distribution from demonstration
-@author: ruan
+
+@author: Sipu Ruan
 """
 
 import numpy as np
@@ -12,6 +13,7 @@ import dtw
 def load_dataset_param(dataset_name):
     """
     Load the parameters for datasets
+
     :param dataset_name: The name of the dataset: "panda_arm", "lasa_handwriting/pose_data"
     :return: The type list of the demonstration
     """
@@ -33,6 +35,7 @@ def load_dataset_param(dataset_name):
 def evaluate_traj_distribution(traj_res, traj_init):
     """
     Evaluate the generated trajectory distribution
+
     :param traj_res: The resulting (generated) trajectory
     :param traj_init: The initial trajectory
     :return: The distance between the generated and initial trajectory mean
@@ -59,6 +62,7 @@ def evaluate_traj_distribution(traj_res, traj_init):
 def evaluate_desired_position(traj_res, x_desired, t_via):
     """
     Evaluate similarity between result and desired pose.
+
     :param traj_res: Resulting (Generated) trajectory
     :param x_desired: The desired position
     :param t_via: The time step of via point
