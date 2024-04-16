@@ -36,37 +36,28 @@ def df_vect(x, f, k, n_r, dim):
 
 def fd_coefficient(k, xbar, x):
     """
-      Compute coefficients for finite difference approximation for the
-      derivative of order k at xbar based on grid values at points in x.
+    Compute coefficients for finite difference approximation for the derivative of order k at xbar based on grid values
+    at points in x.
      
-      This function returns a row vector c of dimension 1 by n, where n=length(x),
-      containing coefficients to approximate u^{(k)}(xbar),
-      the k'th derivative of u evaluated at xbar,  based on n values
-      of u at x(1), x(2), ... x(n).
+    This function returns a row vector c of dimension 1 by n, where n=length(x), containing coefficients to approximate
+    u^{(k)}(xbar), the k'th derivative of u evaluated at xbar,  based on n values of u at x(1), x(2), ... x(n).
      
-      If U is a column vector containing u(x) at these n points, then
-      c*U will give the approximation to u^{(k)}(xbar).
+    If U is a column vector containing u(x) at these n points, then c*U will give the approximation to u^{(k)}(xbar).
      
-      Note for k=0 this can be used to evaluate the interpolating polynomial
-      itself.
+    Note for k=0 this can be used to evaluate the interpolating polynomial itself.
      
-      Requires length(x) > k.
-      Usually the elements x(i) are monotonically increasing
-      and x(1) <= xbar <= x(n), but neither condition is required.
-      The x values need not be equally spaced but must be distinct.
+    Requires length(x) > k. Usually the elements x(i) are monotonically increasing and x(1) <= xbar <= x(n), but neither
+    condition is required. The x values need not be equally spaced but must be distinct.
      
-      This program should give the same results as fdcoeffV.m, but for large
-      values of n is much more stable numerically.
+    This program should give the same results as fdcoeffV.m, but for large values of n is much more stable numerically.
      
-      Based on the program "weights" in
-        B. Fornberg, "Calculation of weights in finite difference formulas",
-        SIAM Review 40 (1998), pp. 685-691.
-     From  http://www.amath.washington.edu/~rjl/fdmbook/  (2007)
+    Based on the program "weights" in B. Fornberg, "Calculation of weights in finite difference formulas",
+    SIAM Review 40 (1998), pp. 685-691. From  http://www.amath.washington.edu/~rjl/fdmbook/  (2007)
 
-    :param k: 
-    :param xbar: 
-    :param x: 
-    :return: 
+    :param k: Order of derivative
+    :param xbar: Element in domain of known function values
+    :param x: The rest elements in domain of known function values
+    :return: Coefficient
     """
 
     n = len(x)

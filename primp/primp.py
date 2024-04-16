@@ -10,6 +10,8 @@ class PrIMP:
     """
     PRIMP class for PRobabilistically-Informed Motion Primitives. It encodes demonstrated trajectories in Lie groups,
     adapts to novel via-point poses.
+
+    @author: Sipu Ruan
     """
     def __init__(self, g_demos=None, mean_init=None, cov_init=None, group_name="SE"):
         # Initial input values
@@ -49,15 +51,15 @@ class PrIMP:
 
     def get_joint_pdf(self):
         """
-        Getter function for joint distribution
-        :returns: self._mean_joint: Mean value of the joint distribution
-        :returns: self._cov_joint: Covariance matrix of the joint distribution
+        Retrieve joint distribution
+        :return: self._mean_joint: Mean value of the joint distribution
+        :return: self._cov_joint: Covariance matrix of the joint distribution
         """
         return self._mean_joint, self._cov_joint
 
     def get_covariance_step(self):
         """
-        Getter function for covariance of each step
+        Retrieve covariance of each step
         :return: cov_step: Covariance matrix of each step
         """
         cov_step = np.empty((self._n_step, 6, 6))
@@ -154,6 +156,9 @@ class PrIMP:
         self._t_idx_matrix = np.kron(p_matrix, np.identity(6))
 
     def __learn(self):
+        """
+        Learn trajectory distribution in Lie groups from demonstrations
+        """
         if self._g_demos is None:
             return
 

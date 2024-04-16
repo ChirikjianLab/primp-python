@@ -1,7 +1,6 @@
 from primp.util.interp_se3_trajectory import interp_se3_trajectory_svd
 from primp.util.finite_difference import df_vect
 from primp.util.se3_util import norm_se3
-
 import numpy as np
 from scipy.integrate import cumtrapz
 
@@ -10,11 +9,10 @@ class GORA:
     """
     Globally Optimal Reparameterization Algorithm (GORA) for SE(3) trajectory data
     1. Recovering a finite difference approximation of the change between adjacent frames of an SE(3) trajectory
-    2. globally minimizing the functional of the form
-        ``J = \int_0^1 g(\tau) \dot{\tau} dt''
+    2. globally minimizing the functional of the form ``J = \int_0^1 g(\tau) \dot{\tau} dt''
     3. reparameterizing the sequence with the optimal time steps
 
-    @authors:Sipu Ruan, Thomas Mitchel
+    @authors: Sipu Ruan, Thomas Mitchel
     """
 
     def __init__(self, g_init, n_step=50):
@@ -36,9 +34,15 @@ class GORA:
         self._g_opt = interp_se3_trajectory_svd(self._t0, self._g_init, self._tau_opt)
 
     def get_optimal_trajectory(self):
+        """
+        Retrieve the optimal trajectory
+        """
         return self._g_opt
 
     def get_optimal_time(self):
+        """
+        Retrieve the optimal temporal reparameterization
+        """
         return self._tau_opt
 
     def get_cost_functional(self, tau, g_tau):

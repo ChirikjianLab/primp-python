@@ -10,6 +10,11 @@ import dtw
 
 
 def load_dataset_param(dataset_name):
+    """
+    Load the parameters for datasets
+    :param dataset_name: The name of the dataset: "panda_arm", "lasa_handwriting/pose_data"
+    :return: The type list of the demonstration
+    """
     demo_type = dict()
 
     # Type of demonstration
@@ -26,6 +31,12 @@ def load_dataset_param(dataset_name):
 
 
 def evaluate_traj_distribution(traj_res, traj_init):
+    """
+    Evaluate the generated trajectory distribution
+    :param traj_res: The resulting (generated) trajectory
+    :param traj_init: The initial trajectory
+    :return: The distance between the generated and initial trajectory mean
+    """
     n_demo = traj_init.shape[0]
     n_sample = traj_res.shape[0]
     n_step = traj_init.shape[1]
@@ -45,8 +56,14 @@ def evaluate_traj_distribution(traj_res, traj_init):
     return d_mean_traj
 
 
-# Evaluate similarity between result and desired pose. Measures distance between mean
 def evaluate_desired_position(traj_res, x_desired, t_via):
+    """
+    Evaluate similarity between result and desired pose.
+    :param traj_res: Resulting (Generated) trajectory
+    :param x_desired: The desired position
+    :param t_via: The time step of via point
+    :return: The distance from the desired position
+    """
     n_sample = traj_res.shape[0]
     n_step = traj_res.shape[1]
 
