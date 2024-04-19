@@ -3,7 +3,7 @@
 
 Python implementation of PRobabilistically-Informed Motion Primitives, a learning-from-demonstration method on Lie group. This work is published in _IEEE Transactions on Robotics (T-RO)_.
 
-- Publication: [T-RO](), [ArXiv](https://arxiv.org/abs/2305.15761)
+- Publication: [T-RO](https://ieeexplore.ieee.org/document/10502164)
 - Project page: [https://chirikjianlab.github.io/primp-page/](https://chirikjianlab.github.io/primp-page/)
 - MATLAB version (includes more demos): [https://github.com/ChirikjianLab/primp-matlab](https://github.com/ChirikjianLab/primp-matlab).
 
@@ -64,4 +64,23 @@ python benchmark_lfd_promp.py
 After running, 3 files will be generated (stored in `/result/${method}_${planning_group}/`):
 1. `reference_density_${object}_${demo_type}.json`: Full information of the learned workspace trajectory distribution
 2. `reference_density_${object}_${demo_type}_mean.csv`: Stores only the mean, for seeding the STOMP planner
-3. `samples_${object}_${demo_type}.json`: Random samples from the learned trajectory distribution 
+3. `samples_${object}_${demo_type}.json`: Random samples from the learned trajectory distribution
+
+## Citation
+```
+S. Ruan, W. Liu, X. Wang, X. Meng and G. S. Chirikjian, "PRIMP: PRobabilistically-Informed Motion Primitives for Efficient Affordance Learning from Demonstration," in IEEE Transactions on Robotics, doi: 10.1109/TRO.2024.3390052.
+```
+
+BibTex
+```
+@ARTICLE{10502164,
+  author={Ruan, Sipu and Liu, Weixiao and Wang, Xiaoli and Meng, Xin and Chirikjian, Gregory S.},
+  journal={IEEE Transactions on Robotics}, 
+  title={PRIMP: PRobabilistically-Informed Motion Primitives for Efficient Affordance Learning from Demonstration}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-20},
+  keywords={Trajectory;Robots;Probabilistic logic;Planning;Affordances;Task analysis;Manifolds;Learning from Demonstration;Probability and Statistical Methods;Motion and Path Planning;Service Robots},
+  doi={10.1109/TRO.2024.3390052}}
+```
